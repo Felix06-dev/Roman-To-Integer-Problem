@@ -1,0 +1,34 @@
+public class Solution
+{
+    public int RomanToInt(string romanNumeral)
+    {
+        Dictionary<char, int> romanValues = new Dictionary<char, int>
+        {
+            { 'I', 1 },
+            { 'V', 5 },
+            { 'X', 10 },
+            { 'L', 50 },
+            { 'C', 100 },
+            { 'D', 500 },
+            { 'M', 1000 }
+        };
+
+        int totalValue = 0;
+        int previousValue = 0;
+
+        for (int i = romanNumeral.Length - 1; i >= 0; i--)
+        {
+            int currentValue = romanValues[romanNumeral[i]];
+
+            // If the current value is less than the previous value, we subtract it (e.g., IV = 5 - 1 = 4)
+            if (currentValue < previousValue)
+                totalValue -= currentValue;
+            else // otherwise, we add it
+                totalValue += currentValue;
+
+            // Update previous value for further iteration
+            previousValue = currentValue;
+        }
+        return totalValue;
+    }
+}
